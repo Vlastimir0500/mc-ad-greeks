@@ -10,3 +10,4 @@ OUTPUTS: results/phase2_estimates.csv, results/phase2_summary.csv
 FIGURES: figures/phase2_delta_rmse.png, figures/phase2_gamma_rmse.png, figures/phase2_vega_rmse.png, figures/phase2_rho_rmse.png
 NEXT_PHASE: Likelihood-Ratio and Pathwise Sensitivity Estimators
 GITHUB_SYNC_CHECK: 2026-10-11 12:39:03
+ADAPTIVE_BENCHMARK_EXECUTED: 2026-10-11 12:48:19
