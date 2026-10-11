@@ -1,3 +1,11 @@
-PROJECT COMPLETION: 20%
-PHASE 1: GBM, European call, Black-Scholes references, Monte Carlo pricing, JAX AD
-PHASE 2: Finite Difference vs Automatic Differentiation
+PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
+PROJECT_COMPLETION: 30%
+CURRENT_PHASE: Finite Difference vs Automatic Differentiation
+MODEL: Black-Scholes Geometric Brownian Motion
+PAYOFF: European Call
+PATHS_PER_REPLICATE: 100000
+INDEPENDENT_REPLICATES: 20
+METHODS: JAX AD, central finite differences, common random numbers
+OUTPUTS: results/phase2_estimates.csv, results/phase2_summary.csv
+FIGURES: figures/phase2_delta_rmse.png, figures/phase2_gamma_rmse.png, figures/phase2_vega_rmse.png, figures/phase2_rho_rmse.png
+NEXT_PHASE: Likelihood-Ratio and Pathwise Sensitivity Estimators
