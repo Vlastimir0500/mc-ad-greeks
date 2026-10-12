@@ -1,9 +1,10 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 55%
-COMPLETED: European-call baseline, analytical references, JAX AD, finite differences, pathwise and likelihood-ratio estimators, digital-call Greek benchmarks, validity screening, fixed-budget selection experiment.
-CURRENT_FOCUS: Compare unconstrained and validity-constrained adaptive selection for digital-call Delta, Vega and Rho.
-BUDGET: Equal wall-clock target for each policy; selector pilot cost is included in adaptive policy time.
-EVALUATION: RMSE, bias, 95% interval coverage, path count, selection overhead and empirical RMSE gap to the best valid fixed baseline.
-LIMITATIONS: Exploratory 12-replicate study; method admissibility is currently a declared rule set; empirical results do not establish novelty or general superiority.
-OUTPUTS: results/validity_regret_estimates.csv, results/validity_regret_summary.csv, results/validity_regret_comparison.csv, figures/validity_regret_comparison.png
-NEXT_PHASE: Extend validity rules to smooth payoffs, add calibration tests, and evaluate sensitivity to pilot size and wall-clock budget.
+PROJECT_COMPLETION: 60%
+MODELS: GBM-based European call and cash-or-nothing digital call.
+GREEKS: Delta, Vega, Rho.
+METHODS: Fixed pathwise, fixed likelihood ratio, fixed common-random-number finite differences, unconstrained adaptation, validity-constrained adaptation.
+PILOT_SIZES: 2048 and 8192 paths.
+EVALUATION: RMSE, bias, standard error, empirical 95% coverage, wall-clock cost, selection rate and empirical regret relative to the best valid fixed baseline.
+LIMITATIONS: Exploratory 20-replicate results; empirical oracle is not deployable; novelty and general superiority remain unestablished.
+OUTPUTS: results/cross_payoff_robustness_estimates.csv, results/cross_payoff_robustness_summary.csv, results/cross_payoff_regret.csv, results/cross_payoff_selection_counts.csv, figures/cross_payoff_robustness.png
+NEXT_PHASE: Investigate uncertainty-aware pilot selection, confidence-interval calibration, and sensitivity to computational budget.
