@@ -1,10 +1,10 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 45%
+PROJECT_COMPLETION: 50%
 BASELINE: GBM European call, Black-Scholes references, finite differences, JAX AD, pathwise and likelihood-ratio estimators.
-ADAPTIVE_BASELINE: Pilot variance-time selection and equal-budget benchmark.
-NEW_TEST_CASE: Cash-or-nothing digital call with analytical price and Greek references.
-VALIDITY_GATE: Blocks pathwise estimator for digital-call Greeks and ranks only admissible candidates.
-METRICS: Bias, RMSE, standard error and empirical 95% interval coverage.
-LIMITATIONS: Thirty-replicate digital experiment is exploratory; the routing policy is a candidate contribution, not a verified novelty claim.
-OUTPUTS: results/digital_delta_estimates.csv, results/digital_delta_summary.csv, results/digital_selector_diagnostics.csv, figures/digital_delta_validity.png
-NEXT_PHASE: Integrate the validity gate into the adaptive estimator and evaluate uncertainty calibration and selection regret under equal wall-clock budgets.
+ADAPTIVE_BASELINE: Pilot selection, equal-budget comparisons and validity-constrained method screening.
+DIGITAL_EXPERIMENT: Cash-or-nothing digital call, analytical price and Greek references, Delta, Vega and Rho.
+METHODS: Pathwise AD, likelihood ratio, common-random-number finite differences.
+METRICS: Bias, RMSE, standard error, empirical 95% interval coverage and finite-difference step-size sensitivity.
+LIMITATIONS: Findings are experimental; no broad superiority claim or verified novelty claim has been established.
+OUTPUTS: results/digital_all_greeks_estimates.csv, results/digital_all_greeks_summary.csv, results/digital_validity_matrix.csv, figures/digital_all_greeks.png
+NEXT_PHASE: Integrate validity screening with adaptive selection and evaluate selection regret under fixed computational budgets.

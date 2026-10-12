@@ -1,0 +1,10 @@
+payoff,greek,method,admissible
+CashDigitalCall,Delta,Pathwise,False
+CashDigitalCall,Delta,LRM,True
+CashDigitalCall,Delta,FD_CRN,True
+CashDigitalCall,Vega,Pathwise,False
+CashDigitalCall,Vega,LRM,True
+CashDigitalCall,Vega,FD_CRN,True
+CashDigitalCall,Rho,Pathwise,False
+CashDigitalCall,Rho,LRM,True
+CashDigitalCall,Rho,FD_CRN,True
