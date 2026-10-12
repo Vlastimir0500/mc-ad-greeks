@@ -1,10 +1,12 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 60%
-MODELS: GBM-based European call and cash-or-nothing digital call.
+PROJECT_COMPLETION: 65%
+MODELS: European call and cash-or-nothing digital call under GBM.
 GREEKS: Delta, Vega, Rho.
-METHODS: Fixed pathwise, fixed likelihood ratio, fixed common-random-number finite differences, unconstrained adaptation, validity-constrained adaptation.
-PILOT_SIZES: 2048 and 8192 paths.
-EVALUATION: RMSE, bias, standard error, empirical 95% coverage, wall-clock cost, selection rate and empirical regret relative to the best valid fixed baseline.
-LIMITATIONS: Exploratory 20-replicate results; empirical oracle is not deployable; novelty and general superiority remain unestablished.
-OUTPUTS: results/cross_payoff_robustness_estimates.csv, results/cross_payoff_robustness_summary.csv, results/cross_payoff_regret.csv, results/cross_payoff_selection_counts.csv, figures/cross_payoff_robustness.png
-NEXT_PHASE: Investigate uncertainty-aware pilot selection, confidence-interval calibration, and sensitivity to computational budget.
+SELECTORS: Unconstrained point score, validity-constrained point score, validity-constrained bootstrap upper-90-percentile score.
+PILOT_SIZES: 1024 and 4096 paths.
+BUDGET: 0.05 seconds including selection and pilot overhead for adaptive methods.
+BOOTSTRAP_REPLICATES: 60.
+METRICS: Bias, RMSE, standard error, empirical 95% coverage, selection frequencies, path counts, timing, empirical regret.
+LIMITATIONS: Exploratory results; variance-time bootstrap bounds do not prove unbiasedness or mathematical validity; empirical best-fixed baseline is an oracle comparator, not a deployable policy.
+OUTPUTS: results/uncertainty_selection_estimates.csv, results/uncertainty_selection_pilot_scores.csv, results/uncertainty_selection_summary.csv, results/uncertainty_selection_counts.csv, results/uncertainty_selection_regret.csv, figures/uncertainty_selection_rmse.png
+NEXT_PHASE: Calibration and independent validation of the selector across additional payoff classes and simulation models.
