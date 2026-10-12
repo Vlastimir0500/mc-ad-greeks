@@ -1,12 +1,10 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 40%
-COMPLETED: GBM Monte Carlo pricing, Black-Scholes analytical references, finite differences, JAX AD, pathwise and likelihood-ratio estimators, pilot-based estimator selection, equal-budget benchmark implementation.
-CURRENT_MODEL: Black-Scholes GBM
-CURRENT_PAYOFF: European call
-VALIDATED_GREEKS: Delta, Vega, Rho
-EQUAL_BUDGET_METHODS: Fixed pathwise, fixed likelihood-ratio, adaptive selection
-EQUAL_BUDGET_METRIC: RMSE across independent replications, standard error, production paths and wall-clock runtime.
-TIMING_PROTOCOL: JIT compilation and warm-up excluded for all methods; adaptive pilot selection included in the adaptive time budget.
-LIMITATION: Eight replicates are exploratory and do not establish statistical superiority or research novelty.
-OUTPUTS: results/equal_budget_estimates.csv, results/equal_budget_summary.csv, figures/equal_budget_rmse.png
-NEXT_PHASE: Add estimator-validity diagnostics and digital-option Greeks; compare against analytical digital-option references.
+PROJECT_COMPLETION: 45%
+BASELINE: GBM European call, Black-Scholes references, finite differences, JAX AD, pathwise and likelihood-ratio estimators.
+ADAPTIVE_BASELINE: Pilot variance-time selection and equal-budget benchmark.
+NEW_TEST_CASE: Cash-or-nothing digital call with analytical price and Greek references.
+VALIDITY_GATE: Blocks pathwise estimator for digital-call Greeks and ranks only admissible candidates.
+METRICS: Bias, RMSE, standard error and empirical 95% interval coverage.
+LIMITATIONS: Thirty-replicate digital experiment is exploratory; the routing policy is a candidate contribution, not a verified novelty claim.
+OUTPUTS: results/digital_delta_estimates.csv, results/digital_delta_summary.csv, results/digital_selector_diagnostics.csv, figures/digital_delta_validity.png
+NEXT_PHASE: Integrate the validity gate into the adaptive estimator and evaluate uncertainty calibration and selection regret under equal wall-clock budgets.
