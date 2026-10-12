@@ -10,3 +10,4 @@ METRICS: Bias, RMSE, standard error, empirical 95% coverage, selection frequenci
 LIMITATIONS: Exploratory results; variance-time bootstrap bounds do not prove unbiasedness or mathematical validity; empirical best-fixed baseline is an oracle comparator, not a deployable policy.
 OUTPUTS: results/uncertainty_selection_estimates.csv, results/uncertainty_selection_pilot_scores.csv, results/uncertainty_selection_summary.csv, results/uncertainty_selection_counts.csv, results/uncertainty_selection_regret.csv, figures/uncertainty_selection_rmse.png
 NEXT_PHASE: Calibration and independent validation of the selector across additional payoff classes and simulation models.
+UNCERTAINTY_SELECTOR_TEST: Regression fixture corrected and test suite passed on 2026-10-12 10:14:11
