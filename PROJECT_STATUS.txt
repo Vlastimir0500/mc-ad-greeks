@@ -1,10 +1,9 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 50%
-BASELINE: GBM European call, Black-Scholes references, finite differences, JAX AD, pathwise and likelihood-ratio estimators.
-ADAPTIVE_BASELINE: Pilot selection, equal-budget comparisons and validity-constrained method screening.
-DIGITAL_EXPERIMENT: Cash-or-nothing digital call, analytical price and Greek references, Delta, Vega and Rho.
-METHODS: Pathwise AD, likelihood ratio, common-random-number finite differences.
-METRICS: Bias, RMSE, standard error, empirical 95% interval coverage and finite-difference step-size sensitivity.
-LIMITATIONS: Findings are experimental; no broad superiority claim or verified novelty claim has been established.
-OUTPUTS: results/digital_all_greeks_estimates.csv, results/digital_all_greeks_summary.csv, results/digital_validity_matrix.csv, figures/digital_all_greeks.png
-NEXT_PHASE: Integrate validity screening with adaptive selection and evaluate selection regret under fixed computational budgets.
+PROJECT_COMPLETION: 55%
+COMPLETED: European-call baseline, analytical references, JAX AD, finite differences, pathwise and likelihood-ratio estimators, digital-call Greek benchmarks, validity screening, fixed-budget selection experiment.
+CURRENT_FOCUS: Compare unconstrained and validity-constrained adaptive selection for digital-call Delta, Vega and Rho.
+BUDGET: Equal wall-clock target for each policy; selector pilot cost is included in adaptive policy time.
+EVALUATION: RMSE, bias, 95% interval coverage, path count, selection overhead and empirical RMSE gap to the best valid fixed baseline.
+LIMITATIONS: Exploratory 12-replicate study; method admissibility is currently a declared rule set; empirical results do not establish novelty or general superiority.
+OUTPUTS: results/validity_regret_estimates.csv, results/validity_regret_summary.csv, results/validity_regret_comparison.csv, figures/validity_regret_comparison.png
+NEXT_PHASE: Extend validity rules to smooth payoffs, add calibration tests, and evaluate sensitivity to pilot size and wall-clock budget.
