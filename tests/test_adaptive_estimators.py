@@ -15,6 +15,7 @@ from mcadgreeks.references.black_scholes import delta_call, vega_call, rho_call
 
 PARAMETERS = (100.0, 100.0, 0.05, 0.20, 1.0)
 
+
 @pytest.mark.parametrize("greek", ["Delta", "Vega", "Rho"])
 @pytest.mark.parametrize("method", ["Pathwise", "LRM"])
 def test_estimator_samples_are_finite(greek, method):
@@ -22,6 +23,7 @@ def test_estimator_samples_are_finite(greek, method):
     values = estimator_samples(z, greek, method, *PARAMETERS)
     assert values.shape == (10000,)
     assert np.all(np.isfinite(np.asarray(values)))
+
 
 @pytest.mark.parametrize(
     "greek,reference,tolerance",
@@ -38,17 +40,29 @@ def test_estimators_match_analytic_reference(greek, reference, tolerance, method
     estimate = float(jnp.mean(values))
     assert abs(estimate - reference) < tolerance
 
+
 @pytest.mark.parametrize("greek", ["Delta", "Vega", "Rho"])
 def test_adaptive_selector_returns_supported_method(greek):
     selected, candidates = select_estimator(
-        jax.random.key(10), greek, "EuropeanCall", PARAMETERS, pilot_paths=2000
+        jax.random.key(10), greek, "EuropeanCall", PARAMETERS, pilot_paths=2000,
+        timing_repeats=1
     )
-    assert selected["method"] in ("Pathwise", "LRM")
-    assert len(candidates) == 2
+    assert selected["method"] in ("Pathwise", "LRM", "FD_CRN")
+    assert len(candidates) == 3
     assert np.isfinite(selected["variance_time_score"])
+
 
 def test_unsupported_greek_is_rejected():
     with pytest.raises(ValueError):
         select_estimator(
-            jax.random.key(10), "Gamma", "EuropeanCall", PARAMETERS, pilot_paths=1000
+            jax.random.key(10), "Theta", "EuropeanCall", PARAMETERS, pilot_paths=1000
         )
+
+
+def test_adaptive_estimator_supports_digital_payoff():
+    result = estimate_greek(
+        jax.random.key(11), "Delta", "CashDigitalCall", PARAMETERS,
+        n_paths=5000, pilot_paths=1000, timing_repeats=1
+    )
+    assert np.isfinite(result["estimate"])
+    assert result["selected_method"] in ("LRM", "FD_CRN")

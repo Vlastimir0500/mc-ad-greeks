@@ -1,13 +1,18 @@
 PROJECT: Monte Carlo Pricing Sensitivities with Automatic Differentiation (JAX)
-PROJECT_COMPLETION: 65%
-MODELS: European call and cash-or-nothing digital call under GBM.
-GREEKS: Delta, Vega, Rho.
-SELECTORS: Unconstrained point score, validity-constrained point score, validity-constrained bootstrap upper-90-percentile score.
-PILOT_SIZES: 1024 and 4096 paths.
-BUDGET: 0.05 seconds including selection and pilot overhead for adaptive methods.
-BOOTSTRAP_REPLICATES: 60.
-METRICS: Bias, RMSE, standard error, empirical 95% coverage, selection frequencies, path counts, timing, empirical regret.
-LIMITATIONS: Exploratory results; variance-time bootstrap bounds do not prove unbiasedness or mathematical validity; empirical best-fixed baseline is an oracle comparator, not a deployable policy.
-OUTPUTS: results/uncertainty_selection_estimates.csv, results/uncertainty_selection_pilot_scores.csv, results/uncertainty_selection_summary.csv, results/uncertainty_selection_counts.csv, results/uncertainty_selection_regret.csv, figures/uncertainty_selection_rmse.png
-NEXT_PHASE: Calibration and independent validation of the selector across additional payoff classes and simulation models.
-UNCERTAINTY_SELECTOR_TEST: Regression fixture corrected and test suite passed on 2026-10-12 10:14:11
+PROJECT_COMPLETION: 82%
+CHECKPOINT_DATE: 2026-10-13
+CHECKPOINT_INTEGRATION: Validated in an isolated workspace; apply the overlay to the primary Windows checkout and run the included validation flow before treating it as integrated. GitHub connector write operations were rejected with HTTP 403, so no remote change is claimed.
+MODELS: Geometric Brownian motion terminal simulation with European call, European put, and cash-or-nothing digital call payoffs.
+GREEKS: Delta, Gamma, Vega, Rho with analytical references for all three payoff classes.
+ESTIMATORS: Pathwise, likelihood-ratio method, and common-random-number finite differences for all four Greeks where implemented.
+SELECTION: Unconstrained point-score, admissibility-constrained point-score, and admissibility-constrained bootstrap upper-90-percentile score.
+VALIDITY: Pathwise Gamma is excluded for all three payoff classes because second-order pathwise differentiation misses payoff-boundary contributions. Digital pathwise Delta/Vega are excluded; unconstrained selection remains available to reproduce invalid zero-variance cases for diagnostics.
+PERFORMANCE: JIT-compiled sample functions are cached by payoff, Greek, method, and parameter tuple. Selection overhead, production-shape warm-up, production execution, and total wall time are reported separately. Benchmark prewarms pilot and production shapes before repeated timing.
+VERIFIED_TESTS: 102 tests passed in 8.70 seconds in the isolated checkpoint workspace on 2026-10-13.
+VERIFIED_BENCHMARK: 10 replications per payoff-Greek-method combination; 480 estimate rows and 48 summary rows across three payoff classes and four Greeks; 200000 production paths and 20000 pilot paths for adaptive selection; all benchmark validation assertions passed.
+BENCHMARK_FINDING: Validity-constrained selection avoids invalid pathwise Gamma and digital payoff estimators. It performs well on the digital Gamma cases in this run, but adaptive selection is not consistently superior to the best fixed estimator and adds selection overhead.
+BENCHMARK_LIMITATION: Latency is hardware and JAX-version dependent. Recorded benchmark timings are warmed-JIT timings; production-shape warm-up is separately reported. These experiments do not establish universal efficiency gains.
+CI: Workflow runs tests, the adaptive benchmark, benchmark validation, and uploads CSV/environment artifacts.
+LIMITATIONS: The admissibility table encodes analyst-established applicability, not an automatic mathematical proof. Bootstrap bounds quantify pilot-score uncertainty only and do not certify estimator validity. Validation currently covers GBM and three European-style payoff classes, not path-dependent or stochastic-volatility models.
+OUTPUTS: results/adaptive_estimator_benchmark.csv, results/adaptive_estimator_summary.csv, results/adaptive_benchmark_environment.txt, results/uncertainty_selection_estimates.csv, results/uncertainty_selection_pilot_scores.csv, results/uncertainty_selection_summary.csv, results/uncertainty_selection_counts.csv, results/uncertainty_selection_regret.csv, figures/uncertainty_selection_rmse.png
+NEXT_PHASE: Integrate the verified patch into the primary checkout; expand model/payoff coverage and calibration before marking the project complete.

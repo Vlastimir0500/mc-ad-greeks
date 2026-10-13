@@ -3,9 +3,12 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -14,4 +17,15 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e ".[dev]"
-      - run: pytest -q
+      - run: python -m pytest -q
+      - run: python experiments/adaptive_estimator.py
+      - run: python experiments/validate_benchmark.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-estimator-benchmark
+          path: |
+            results/adaptive_estimator_benchmark.csv
+            results/adaptive_estimator_summary.csv
+            results/adaptive_benchmark_environment.txt
+          if-no-files-found: error
+          retention-days: 30
