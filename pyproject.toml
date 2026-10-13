@@ -15,6 +15,9 @@ dependencies = [
     "matplotlib"
 ]
 
+[project.scripts]
+mcadgreeks = "mcadgreeks.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest"]
 
