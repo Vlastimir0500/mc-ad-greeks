@@ -60,9 +60,13 @@ def test_gamma_lrm_estimator_matches_analytic_reference(payoff):
 
 @pytest.mark.parametrize("payoff", ALL_PAYOFFS)
 def test_gamma_pathwise_is_not_admissible(payoff):
-    assert "Pathwise" not in admissible_methods(payoff, "Gamma")
-    assert "LRM" in admissible_methods(payoff, "Gamma")
-    assert "FD_CRN" in admissible_methods(payoff, "Gamma")
+    valid = admissible_methods(payoff, "Gamma")
+    assert "Pathwise" not in valid
+    assert "LRM" in valid
+    if payoff == "CashDigitalCall":
+        assert valid == ("LRM",)
+    else:
+        assert "FD_CRN" in valid
 
 
 def test_unconstrained_digital_delta_can_select_invalid_zero_variance_pathwise():
