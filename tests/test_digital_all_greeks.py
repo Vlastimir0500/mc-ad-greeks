@@ -51,9 +51,7 @@ def test_lrm_matches_analytical_digital_greek(greek, tolerance):
 @pytest.mark.parametrize("greek", ["Delta", "Vega", "Rho"])
 def test_digital_pathwise_is_not_admissible(greek):
     valid = admissible_methods("CashDigitalCall", greek)
-    assert "Pathwise" not in valid
-    assert "LRM" in valid
-    assert "FD_CRN" in valid
+    assert valid == ("LRM",)
 
 @pytest.mark.parametrize("greek", ["Delta", "Vega", "Rho"])
 def test_finite_difference_samples_are_finite(greek):

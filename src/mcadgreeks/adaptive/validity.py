@@ -12,10 +12,10 @@ ADMISSIBILITY = {
         "Rho": ("Pathwise", "LRM", "FD_CRN"),
     },
     "CashDigitalCall": {
-        "Delta": ("LRM", "FD_CRN"),
-        "Gamma": ("LRM", "FD_CRN"),
-        "Vega": ("LRM", "FD_CRN"),
-        "Rho": ("LRM", "FD_CRN"),
+        "Delta": ("LRM",),
+        "Gamma": ("LRM",),
+        "Vega": ("LRM",),
+        "Rho": ("LRM",),
     },
 }
 

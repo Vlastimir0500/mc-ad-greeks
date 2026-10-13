@@ -40,7 +40,7 @@ def test_digital_valid_selection_never_chooses_pathwise(greek):
         pilot_paths=2048, timing_repeats=1, criterion="valid_point"
     )
     assert selected["method"] in admissible_methods("CashDigitalCall", greek)
-    assert selected["method"] in ("LRM", "FD_CRN")
+    assert selected["method"] == "LRM"
     assert {candidate["method"] for candidate in candidates} == {"Pathwise", "LRM", "FD_CRN"}
 
 
@@ -164,5 +164,10 @@ def test_gamma_finite_difference_step_stays_positive_for_small_spot():
         jax.random.key(20261019), "Gamma", "CashDigitalCall", parameters,
         pilot_paths=512, timing_repeats=1, criterion="valid_point"
     )
-    assert selected["method"] in ("LRM", "FD_CRN")
+    assert selected["method"] == "LRM"
     assert all(np.isfinite(candidate["variance_time_score"]) for candidate in candidates)
+
+
+@pytest.mark.parametrize("greek", GREEKS)
+def test_digital_validity_rules_only_allow_lrm(greek):
+    assert admissible_methods("CashDigitalCall", greek) == ("LRM",)
